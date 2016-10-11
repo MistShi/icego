@@ -18,6 +18,10 @@ STUN (RFC 3489, 5389) client and server implementation in Go.
 
 * `go get github.com/osrtss/stungo`
 
+## Import
+
+* `import "github.com/osrtss/stungo"`
+
 ## RFCs
 
 * [RFC 5389: STUN](https://datatracker.ietf.org/doc/rfc5389/)
