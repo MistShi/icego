@@ -126,10 +126,12 @@ func (srv *Server) serveConn(conn net.Conn) error {
 }
 
 func (srv *Server) serve(rw ResponseWriter, r *Message, err error) error {
-	if r.IsType(TypeRequest) || r.IsType(TypeIndication) {
-		if srv.GetAuthKey != nil {
-			if !r.Attributes.Has(AttrMessageIntegrity) || !r.Attributes.Has(AttrMessageIntegrity) {
-				err = ErrUnauthorized
+	if r != nil {
+		if r.IsType(TypeRequest) || r.IsType(TypeIndication) {
+			if srv.GetAuthKey != nil {
+				if !r.Attributes.Has(AttrMessageIntegrity) || !r.Attributes.Has(AttrMessageIntegrity) {
+					err = ErrUnauthorized
+				}
 			}
 		}
 	}
