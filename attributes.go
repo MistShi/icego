@@ -135,6 +135,7 @@ func (err errUnknownAttrCodec) Error() string {
 // Attributes represents a set of STUN attributes.
 type Attributes map[uint16]interface{}
 
+// Has has the id or not
 func (at Attributes) Has(id uint16) (ok bool) {
 	_, ok = at[id]
 	return
@@ -151,7 +152,7 @@ func (at Attributes) String(id uint16) string {
 		case (fmt.Stringer):
 			return v.String()
 		default:
-			return fmt.Sprintf("%", r)
+			return fmt.Sprintf("%v", r)
 		}
 	}
 	return ""

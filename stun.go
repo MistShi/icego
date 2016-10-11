@@ -9,7 +9,10 @@ import (
 	"strings"
 )
 
+// ErrUnsupportedScheme unsupported scheme
 var ErrUnsupportedScheme = errors.New("stun: unsupported scheme")
+
+// ErrNoAddressResponse no mapped address
 var ErrNoAddressResponse = errors.New("stun: no mapped address")
 
 // Lookup connects to the given STUN URI and makes the STUN binding request.
@@ -60,6 +63,7 @@ func ListenAndServeTLS(network, addr string, certFile, keyFile string, handler H
 	return srv.ListenAndServeTLS(network, addr, certFile, keyFile)
 }
 
+// LongTermAuthKey return a long term auth key function
 func LongTermAuthKey(username, password string) func(attrs Attributes) ([]byte, error) {
 	return func(attrs Attributes) ([]byte, error) {
 		if attrs.Has(AttrRealm) {

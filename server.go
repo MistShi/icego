@@ -22,6 +22,7 @@ func (f HandlerFunc) ServeSTUN(rw ResponseWriter, r *Message) {
 	f(rw, r)
 }
 
+// ResponseWriter response writer interface
 type ResponseWriter interface {
 	LocalAddr() net.Addr
 	RemoteAddr() net.Addr
@@ -36,6 +37,7 @@ type Server struct {
 	Handler Handler
 }
 
+// NewServer create a new Server
 func NewServer(config *Config) *Server {
 	if config == nil {
 		config = DefaultConfig
@@ -129,7 +131,7 @@ func (srv *Server) serve(rw ResponseWriter, r *Message, err error) error {
 	if r != nil {
 		if r.IsType(TypeRequest) || r.IsType(TypeIndication) {
 			if srv.GetAuthKey != nil {
-				if !r.Attributes.Has(AttrMessageIntegrity) || !r.Attributes.Has(AttrMessageIntegrity) {
+				if !r.Attributes.Has(AttrMessageIntegrity) {
 					err = ErrUnauthorized
 				}
 			}

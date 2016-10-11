@@ -13,6 +13,7 @@ type Encoder struct {
 	w writer
 }
 
+// NewEncoder create a new Encoder
 func NewEncoder(config *Config) *Encoder {
 	if config == nil {
 		config = DefaultConfig
@@ -105,6 +106,7 @@ func integrity(v, key []byte) []byte {
 	return h.Sum(nil)
 }
 
+// Writer bytes writer interface
 type Writer interface {
 	// Next returns a slice of the next n bytes.
 	Next(n int) []byte
@@ -118,7 +120,7 @@ type writer struct {
 func (w *writer) Next(n int) (b []byte) {
 	p := w.pos + n
 	if len(w.buf) < p {
-		b := make([]byte, (1+((p-1)>>10))<<10)
+		b = make([]byte, (1+((p-1)>>10))<<10)
 		if w.pos > 0 {
 			copy(b, w.buf[:w.pos])
 		}

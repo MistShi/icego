@@ -91,8 +91,9 @@ func (c addrCodec) Decode(r Reader) (interface{}, error) {
 			}
 		}
 		return &Addr{IP: ip, Port: port ^ 0x2112}, nil
-	} else {
-		copy(ip, b)
 	}
+
+	copy(ip, b)
+
 	return &Addr{IP: ip, Port: port}, nil
 }

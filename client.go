@@ -16,6 +16,7 @@ type Client struct {
 	Timeout time.Duration
 }
 
+// NewClient create a STUN client
 func NewClient(c net.Conn, config *Config) *Client {
 	return &Client{
 		Conn:    NewConn(c, config),
@@ -88,6 +89,7 @@ func (c *Client) RoundTrip(req *Message) (res *Message, err error) {
 	}
 }
 
+// GetServerAddress return server address
 func GetServerAddress(h string, secure bool) string {
 	host, port, err := net.SplitHostPort(h)
 	if err != nil {

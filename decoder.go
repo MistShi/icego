@@ -22,7 +22,7 @@ var ErrIncorrectFingerprint = errors.New("stun: incorrect fingerprint")
 // ErrFormat is returned by Decode when a buffer is not a valid STUN message.
 var ErrFormat = errors.New("stun: incorrect format")
 
-// ErrFormat is returned by ReadMessage when a STUN message was truncated.
+// ErrTruncated is returned by ReadMessage when a STUN message was truncated.
 var ErrTruncated = errors.New("stun: truncated")
 
 // ErrUnknownAttrs is returned when a STUN message contains unknown comprehension-required attributes.
@@ -37,9 +37,10 @@ func (e ErrUnknownAttrs) Error() string {
 // A Decoder reads and decodes STUN messages from a buffer.
 type Decoder struct {
 	*Config
-	key []byte
+	//key []byte
 }
 
+// NewDecoder create a new Decoder
 func NewDecoder(config *Config) *Decoder {
 	if config == nil {
 		config = DefaultConfig
@@ -127,6 +128,7 @@ func (dec *Decoder) Decode(b []byte, key []byte) (*Message, error) {
 	return m, nil
 }
 
+// Reader bytes reader interface
 type Reader interface {
 	// Next returns a slice of the next n bytes.
 	Next(n int) ([]byte, error)

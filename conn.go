@@ -41,6 +41,7 @@ func (c *Config) getAttrCodec(at uint16) AttrCodec {
 	return GetAttributeCodec(at)
 }
 
+// DefaultConfig default config when net set
 var DefaultConfig = &Config{
 	GetAttributeCodec: GetAttributeCodec,
 }
